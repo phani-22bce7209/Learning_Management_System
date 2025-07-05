@@ -1,3 +1,1 @@
-
-// BaseUrl.js
-export const baseUrl = "http://localhost:5001/api/";
+export const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:5001/api/";
