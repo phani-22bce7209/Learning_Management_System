@@ -15,12 +15,13 @@ function Signupstudent() {
   const [areaOfStudy, setAreaOfStudy] = useState("")
   const [skills, setSkills] = useState([])
   const [language, setLanguage] = useState("")
+  const [skillInput, setSkillInput] = useState("")
   const [validation, setValidation] = useState(false)
 
   
 
   const postStudentData = () => {
-    if (name !== "" & email !== "" & password !== "" & grade !== "" & areaOfStudy !== "" & skills !== "" & language !== ""&email.includes("@")&email.includes(".com")) {
+    if (name !== "" & email !== "" & password !== "" & grade !== "" & areaOfStudy !== "" &  language !== ""&email.includes("@")&email.includes(".com")) {
       const item = {
         name: name,
         email: email,
@@ -107,20 +108,61 @@ function Signupstudent() {
                 <option>other</option>
               </select>
             </div>
-            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", height: "60px", justifyContent: "space-evenly" }}>
-              <select onChange={(e) => setSkills([...skills,e.target.value])} style={{ width: "50%", height: 40,border:validation===true&skills.length<1?"1px solid red":"1px solid #0a98e2" }}>
-                <option selected disabled>Skills</option>
-                {courseData.map((i)=>
-                <option>{i.courseName}</option>
-                )}
- 
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", gap: 10, marginBottom: 10 }}>
+              <input
+              value={skillInput}
+              onChange={(e) => setSkillInput(e.target.value)}
+              placeholder="Enter a skill"
+              style={{
+                width: "40%",
+                height: 40,
+                border: validation && skills.length === 0 ? "1px solid red" : "1px solid #0a98e2"
+              }}
+            />
+            <button
+            className="btn btn-outline-primary"
+            onClick={() => {
+              if (skillInput.trim() !== "" && !skills.includes(skillInput.trim())) {
+                setSkills([...skills, skillInput.trim()]);
+                setSkillInput(""); // clear input box
+              }
+            }}
+            >
+            Add
+            </button>
+          </div>
 
-              </select>
-    
-            </div>
-            <div style={{height:10, width:"100%", display:"flex", alignItems:"center"}}>
-              {skills.map((i)=><label style={{marginLeft:10}}>{i},</label>)}
-              </div>
+            <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+  <div style={{ width: "50%", display: "flex", flexWrap: "wrap", gap: 10, marginTop: 10 }}>
+    {skills.map((skill, index) => (
+      <span
+        key={index}
+        style={{
+          backgroundColor: "#e0f7fa",
+          padding: "5px 10px",
+          borderRadius: "15px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {skill}
+        <span
+          onClick={() => setSkills(skills.filter((_, i) => i !== index))}
+          style={{
+            marginLeft: 8,
+            color: "red",
+            cursor: "pointer",
+            fontWeight: "bold"
+          }}
+        >
+          ×
+        </span>
+      </span>
+    ))}
+  </div>
+</div>
+
+
             <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", height: "60px", justifyContent: "space-evenly" }}>
               <select onChange={(e) => setLanguage(e.target.value)} style={{ width: "50%", height: 40, border:validation===true&language===""?"1px solid red":"1px solid #0a98e2"}}>
                 <option selected disabled>Learning Objective</option>

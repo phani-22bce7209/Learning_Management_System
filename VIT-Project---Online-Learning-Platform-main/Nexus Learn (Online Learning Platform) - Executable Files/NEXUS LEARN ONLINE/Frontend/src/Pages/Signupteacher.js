@@ -29,7 +29,7 @@ function Signupteacher() {
 
   const postTeachersData = () => {
 
-    if (name !== "" & email !== "" & password !== "" & qualification !== "" & specialization !== "" & teachingExp !== ""&email.includes("@")&email.includes(".com")) {
+    if (name !== "" & email !== "" & password !== "" & qualification !== "" & teachingExp !== ""&email.includes("@")&email.includes(".com")) {
       const item = {
         name: name,
         email: email,
@@ -105,14 +105,16 @@ function Signupteacher() {
             <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", height: "60px", justifyContent: "space-evenly" }}>
               <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" style={{ width: "50%", height: 40,border:validation===true&password===""?"1px solid red":"1px solid #0a98e2" }} />
             </div>
-            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", height: "60px", justifyContent: "space-evenly" }}>
-              <select onChange={(e) => setSpecialization(e.target.value)} style={{ width: "50%", height: 40,border:validation===true&specialization===""?"1px solid red":"1px solid #0a98e2" }}>
-                <option selected disabled>Specialization</option>
-                {courseData.map((i) =>
-                  <option>{i.courseName}</option>
-                )}
-              </select>
+            
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", height: "60px", justifyContent: "space-evenly" }}>  
+              <input
+              placeholder="Specialization"
+              value={specialization}
+              onChange={(e) => setSpecialization(e.target.value)}
+              style={{ width: "50%", height: 40, border: validation === true && specialization === "" ? "1px solid red" : "1px solid #0a98e2" }}
+              />
             </div>
+
             <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", height: "60px", justifyContent: "space-evenly" }}>
 
               <select onChange={(e) => setQualification(e.target.value)} style={{ width: "50%", height: 40, border:validation===true&qualification===""?"1px solid red":"1px solid #0a98e2"}}>
